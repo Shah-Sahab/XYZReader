@@ -52,6 +52,7 @@ public class ArticleListActivity extends AppCompatActivity implements
     private SimpleDateFormat outputFormat = new SimpleDateFormat();
     // Most time functions can only handle 1902 - 2037
     private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2,1,1);
+    private int actionBarHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,14 @@ public class ArticleListActivity extends AppCompatActivity implements
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
+        TypedValue typedValue = new TypedValue();
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, typedValue, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(typedValue.data,getResources().getDisplayMetrics());
+        }
+
+        mSwipeRefreshLayout.setProgressViewOffset(false, 0, actionBarHeight);
+        mSwipeRefreshLayout.setOnRefreshListener(mSwipeToRefreshListener);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         getLoaderManager().initLoader(0, null, this);
 
@@ -67,6 +76,13 @@ public class ArticleListActivity extends AppCompatActivity implements
             refresh();
         }
     }
+
+    SwipeRefreshLayout.OnRefreshListener mSwipeToRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            refresh();
+        }
+    };
 
     private void refresh() {
         startService(new Intent(this, UpdaterService.class));
