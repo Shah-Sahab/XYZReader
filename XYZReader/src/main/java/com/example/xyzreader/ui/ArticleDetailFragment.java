@@ -141,7 +141,8 @@ public class ArticleDetailFragment extends Fragment implements
         TextView bodyView = (TextView) mRootView.findViewById(R.id.article_body);
 
         if (mCursor != null) {
-            mAppCompatActivity.setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
+            mAppCompatActivity.getSupportActionBar().setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
+
             Date publishedDate = parsePublishedDate();
             if (!publishedDate.before(START_OF_EPOCH.getTime())) {
                 bylineView.setText(Html.fromHtml(
