@@ -30,7 +30,7 @@ public class ArticleDetailActivity extends ActionBarActivity
     private long mStartId;
 
     private long mSelectedItemId;
-    private int mSelectedItemUpButtonFloor = Integer.MAX_VALUE;
+//    private int mSelectedItemUpButtonFloor = Integer.MAX_VALUE;
     private int mTopInset;
 
     private ViewPager mPager;
@@ -72,7 +72,7 @@ public class ArticleDetailActivity extends ActionBarActivity
                     mCursor.moveToPosition(position);
                 }
                 mSelectedItemId = mCursor.getLong(ArticleLoader.Query._ID);
-                updateUpButtonPosition();
+//                updateUpButtonPosition();
             }
         });
 
@@ -86,18 +86,18 @@ public class ArticleDetailActivity extends ActionBarActivity
             }
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mUpButtonContainer.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
-                @Override
-                public WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-                    view.onApplyWindowInsets(windowInsets);
-                    mTopInset = windowInsets.getSystemWindowInsetTop();
-                    mUpButtonContainer.setTranslationY(mTopInset);
-                    updateUpButtonPosition();
-                    return windowInsets;
-                }
-            });
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            mUpButtonContainer.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+//                @Override
+//                public WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
+//                    view.onApplyWindowInsets(windowInsets);
+//                    mTopInset = windowInsets.getSystemWindowInsetTop();
+//                    mUpButtonContainer.setTranslationY(mTopInset);
+//                    updateUpButtonPosition();
+//                    return windowInsets;
+//                }
+//            });
+//        }
 
         if (savedInstanceState == null) {
             if (getIntent() != null && getIntent().getData() != null) {
@@ -139,16 +139,16 @@ public class ArticleDetailActivity extends ActionBarActivity
         mPagerAdapter.notifyDataSetChanged();
     }
 
-    public void onUpButtonFloorChanged(long itemId, ArticleDetailFragment fragment) {
-        if (itemId == mSelectedItemId) {
-            mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();
-            updateUpButtonPosition();
-        }
-    }
+//    public void onUpButtonFloorChanged(long itemId, ArticleDetailFragment fragment) {
+//        if (itemId == mSelectedItemId) {
+//            mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();
+//            updateUpButtonPosition();
+//        }
+//    }
 
     private void updateUpButtonPosition() {
         int upButtonNormalBottom = mTopInset + mUpButton.getHeight();
-        mUpButton.setTranslationY(Math.min(mSelectedItemUpButtonFloor - upButtonNormalBottom, 0));
+//        mUpButton.setTranslationY(Math.min(mSelectedItemUpButtonFloor - upButtonNormalBottom, 0));
     }
 
     private class MyPagerAdapter extends FragmentStatePagerAdapter {
@@ -161,8 +161,8 @@ public class ArticleDetailActivity extends ActionBarActivity
             super.setPrimaryItem(container, position, object);
             ArticleDetailFragment fragment = (ArticleDetailFragment) object;
             if (fragment != null) {
-                mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();
-                updateUpButtonPosition();
+//                mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();
+//                updateUpButtonPosition();
             }
         }
 
