@@ -26,7 +26,7 @@ import android.widget.LinearLayout;
  */
 public class MaxWidthLinearLayout extends LinearLayout {
     private static final int[] ATTRS = {
-            android.R.attr.maxWidth
+                    android.R.attr.maxWidth
     };
 
     private int mMaxWidth = Integer.MAX_VALUE;

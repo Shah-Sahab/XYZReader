@@ -47,8 +47,8 @@ public class RemoteEndpointUtil {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
-                .url(url)
-                .build();
+                        .url(url)
+                        .build();
 
         Response response = client.newCall(request).execute();
         return response.body().string();
